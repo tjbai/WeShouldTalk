@@ -4,7 +4,7 @@ import SearchInput from "./SearchInput";
 import NavRight from "./NavRight/NavRight";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "../../firebase/clientApp";
-import Directory from "./Directory/Directory";
+import Directory from "./Directory";
 
 type NavbarProps = {};
 
