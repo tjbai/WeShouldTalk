@@ -15,6 +15,9 @@ export const theme = extendTheme({
   fonts: {
     body: "Open Sans, sans-serif",
   },
+  breakpoints: {
+    createPostOverlaps: "1000px",
+  },
   styles: {
     global: () => ({
       body: {

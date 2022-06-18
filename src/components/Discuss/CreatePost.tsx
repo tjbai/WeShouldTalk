@@ -6,7 +6,11 @@ import { useSetRecoilState } from "recoil";
 import { authModalState } from "../../atoms/authModalAtom";
 import { auth } from "../../firebase/clientApp";
 
-const CreatePost: React.FC = () => {
+type CreatePostProps = {
+  query: any;
+};
+
+const CreatePost: React.FC<CreatePostProps> = (query) => {
   const router = useRouter();
   const [user] = useAuthState(auth);
   const SetAuthModalState = useSetRecoilState(authModalState);
@@ -25,13 +29,13 @@ const CreatePost: React.FC = () => {
       align="center"
       bg="white"
       height="56px"
-      borderRadius={4}
+      borderRadius="10px"
       border="1px solid"
       borderColor="gray.300"
       p={2}
       mb={4}
       grow={1}
-      maxWidth="560px"
+      maxWidth={{ createPostOverlaps: "560px", base: "none" }}
     >
       <Icon fontSize="20pt" mr={2} color="gray.200" />
       <Input
