@@ -29,7 +29,7 @@ const Tab: React.FC<TabProps> = ({ item, selected, setWhichTab }) => {
       onClick={() => setWhichTab(item.title)}
     >
       <Flex align="center" height="18px" margin="0px 10px">
-        <Icon as={item.icon}></Icon>
+        <Icon fontSize="22" as={item.icon}></Icon>
       </Flex>
       <Text fontWeight="bold" fontSize="15pt">
         {item.title}

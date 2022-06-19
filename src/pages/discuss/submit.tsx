@@ -3,10 +3,14 @@ import React from "react";
 import About from "../../components/Discuss/About";
 import NewPostForm from "../../components/Posts/PostForm";
 import PageContent from "../../components/Layout/PageContent";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { auth } from "../../firebase/clientApp";
 
 type submitProps = {};
 
 const submit: React.FC<submitProps> = () => {
+  const [user] = useAuthState(auth);
+
   return (
     <PageContent>
       <></>
@@ -21,7 +25,7 @@ const submit: React.FC<submitProps> = () => {
             Create a post
           </Text>
         </Box>
-        <NewPostForm />
+        {user && <NewPostForm user={user} />}
       </>
       <></>
     </PageContent>
