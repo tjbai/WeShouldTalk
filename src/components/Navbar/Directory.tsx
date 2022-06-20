@@ -24,7 +24,7 @@ const Directory: React.FC = () => {
         _hover={{ bg: "brand.200" }}
         padding="2px 12px"
         height="35px"
-        mr="20px"
+        mr="5px"
       >
         <Flex alignItems="center" justify="space-between">
           <Flex alignItems="center">

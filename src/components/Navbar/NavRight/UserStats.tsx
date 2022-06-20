@@ -20,7 +20,7 @@ const UserStats: React.FC<UserStatsProps> = ({ user }) => {
     <Menu>
       <MenuButton
         cursor="pointer"
-        borderRadius="15px"
+        borderRadius="20px"
         _hover={{ bg: "#E2E8F0" }}
         padding="2px 8px"
         height="35px"

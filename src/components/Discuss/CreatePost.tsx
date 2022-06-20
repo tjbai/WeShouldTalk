@@ -5,6 +5,7 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { useSetRecoilState } from "recoil";
 import { authModalState } from "../../atoms/authModalAtom";
 import { auth } from "../../firebase/clientApp";
+import { ImPencil2 } from "react-icons/im";
 
 type CreatePostProps = {
   query: any;
@@ -37,15 +38,15 @@ const CreatePost: React.FC<CreatePostProps> = (query) => {
       grow={1}
       maxWidth={{ createPostOverlaps: "560px", base: "none" }}
     >
-      <Icon fontSize="20pt" mr={2} color="gray.200" />
+      <Icon as={ImPencil2} fontSize="20pt" mr={2} mb={1} color="gray.400" />
       <Input
-        placeholder="Create Post"
+        placeholder="Add to the conversation"
         fontSize="10pt"
         _placeholder={{ color: "gray.500" }}
         _hover={{
           bg: "white",
           border: "1px solid",
-          borderColor: "blue.500",
+          borderColor: "brand.100",
         }}
         _focus={{
           outline: "none",
@@ -57,7 +58,7 @@ const CreatePost: React.FC<CreatePostProps> = (query) => {
         borderColor="gray.200"
         height="36px"
         borderRadius={4}
-        mr={4}
+        // mr={4}
         onClick={onClick}
       />
     </Flex>

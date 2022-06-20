@@ -22,12 +22,12 @@ const SearchInput: React.FC<SearchInputProps> = ({ user }) => {
           _hover={{
             bg: "white",
             border: "1px solid",
-            borderColor: "blue.500",
+            borderColor: "brand.200",
           }}
           _focus={{
             outline: "none",
             border: "1px solid",
-            borderColor: "blue.500",
+            borderColor: "brand.200",
           }}
           bg="gray.50"
         />

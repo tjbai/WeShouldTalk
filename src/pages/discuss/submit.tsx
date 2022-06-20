@@ -1,7 +1,7 @@
 import { Box, Text } from "@chakra-ui/react";
 import React from "react";
 import About from "../../components/Discuss/About";
-import NewPostForm from "../../components/Posts/PostForm";
+import NewPostForm from "../../components/Discuss/Posts/PostForm";
 import PageContent from "../../components/Layout/PageContent";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "../../firebase/clientApp";

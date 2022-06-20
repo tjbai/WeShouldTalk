@@ -1,4 +1,13 @@
-import { Flex, Icon } from "@chakra-ui/react";
+import {
+  Alert,
+  AlertDescription,
+  AlertIcon,
+  AlertTitle,
+  CloseButton,
+  Flex,
+  Icon,
+  Text,
+} from "@chakra-ui/react";
 import { User } from "firebase/auth";
 import {
   addDoc,
@@ -11,8 +20,8 @@ import { getDownloadURL, ref, uploadString } from "firebase/storage";
 import { useRouter } from "next/router";
 import React, { useState } from "react";
 import { IoDocumentText, IoImageOutline } from "react-icons/io5";
-import { Post } from "../../atoms/postAtom";
-import { firestore, storage } from "../../firebase/clientApp";
+import { Post } from "../../../atoms/postAtom";
+import { firestore, storage } from "../../../firebase/clientApp";
 import ImageUpload from "./ImageUpload";
 import PostTab from "./PostTab";
 import TabItem from "./TabItem";
@@ -47,13 +56,13 @@ const NewPostForm: React.FC<NewPostFormProps> = ({ user }) => {
   });
   const [image, setImage] = useState<string>();
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(false);
   const router = useRouter();
 
   // Send post information to firebase
   const handleSubmit = async () => {
     // Create post object
     const post: Post = {
-      // id:
       creatorId: user?.uid,
       title: text.title,
       body: text.body,
@@ -66,23 +75,21 @@ const NewPostForm: React.FC<NewPostFormProps> = ({ user }) => {
     // Store post in firebase firestore "discuss" collection
     try {
       const docRef = await addDoc(collection(firestore, "discuss"), post);
-      console.log("STEP 1");
 
       // If there is an image, store the image in firebase storage.
       if (image) {
         const imgRef = ref(storage, `posts/${docRef.id}/image`);
         await uploadString(imgRef, image, "data_url");
         const downloadURL = await getDownloadURL(imgRef);
-        console.log("STEP 2");
 
         // Update post object
         await updateDoc(docRef, {
           imageURL: downloadURL,
         });
-        console.log("STEP 3");
       }
     } catch (error) {
       console.log("Create post error", error);
+      setError(true);
     }
     setLoading(false);
 
@@ -152,6 +159,12 @@ const NewPostForm: React.FC<NewPostFormProps> = ({ user }) => {
           />
         )}
       </Flex>
+      {error && (
+        <Alert status="error">
+          <AlertIcon />
+          <Text>Error creating post</Text>
+        </Alert>
+      )}
     </Flex>
   );
 };
