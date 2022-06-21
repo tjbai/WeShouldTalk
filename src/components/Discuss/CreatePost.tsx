@@ -36,7 +36,7 @@ const CreatePost: React.FC<CreatePostProps> = (query) => {
       p={2}
       mb={4}
       grow={1}
-      maxWidth={{ createPostOverlaps: "560px", base: "none" }}
+      maxWidth={{ createPostOverlaps: "540px", base: "none" }}
     >
       <Icon as={ImPencil2} fontSize="20pt" mr={2} mb={1} color="gray.400" />
       <Input
@@ -58,7 +58,6 @@ const CreatePost: React.FC<CreatePostProps> = (query) => {
         borderColor="gray.200"
         height="36px"
         borderRadius={4}
-        // mr={4}
         onClick={onClick}
       />
     </Flex>

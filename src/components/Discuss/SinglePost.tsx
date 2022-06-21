@@ -1,18 +1,27 @@
-import React from "react";
+import React, { useState } from "react";
 import { Post } from "../../atoms/postAtom";
 import { HiSpeakerphone } from "react-icons/hi";
-import { GiHeartPlus, GiHeartMinus } from "react-icons/gi";
-import { Box, Flex, Icon, Stack, Text, Image, Button } from "@chakra-ui/react";
-import { theme } from "@chakra-ui/react";
-import { BiRotateLeft } from "react-icons/bi";
+import {
+  Box,
+  Flex,
+  Icon,
+  Stack,
+  Text,
+  Image,
+  Button,
+  Skeleton,
+} from "@chakra-ui/react";
 import moment from "moment";
+import { FaHeart, FaHeartBroken } from "react-icons/fa";
+import { AiFillDelete } from "react-icons/ai";
+// import { userInfo } from "os";
 
 type SinglePostProps = {
   post: Post;
   madeByUser: boolean;
   touchedByUser: number;
-  onVote: () => {};
-  onRemove: () => {};
+  onVote: (post: Post, vote: number) => {};
+  onRemove: (post: Post) => Promise<boolean>;
   onSelect: () => void;
 };
 
@@ -24,6 +33,18 @@ const SinglePost: React.FC<SinglePostProps> = ({
   onRemove,
   onSelect,
 }) => {
+  const [imageLoading, setImageLoading] = useState(true);
+  const handleDelete = async () => {
+    try {
+      const deleted = await onRemove(post);
+      if (!deleted) {
+        throw new Error("Error deleting post");
+      }
+    } catch (error) {
+      console.log("Handle delete", error);
+    }
+  };
+
   return (
     <Flex
       width="100%"
@@ -59,75 +80,118 @@ const SinglePost: React.FC<SinglePostProps> = ({
               width="auto"
               height="auto"
             >
+              {imageLoading && (
+                <Skeleton
+                  height="200px"
+                  width="100%"
+                  borderRadius="10px"
+                  mt={4}
+                />
+              )}
               <Image
                 objectFit="cover"
                 borderRadius="10px"
                 src={post.imageURL}
+                onLoad={() => setImageLoading(false)}
               />
             </Flex>
           )}
         </Flex>
 
-        {/* time and comment bar */}
+        {/* user utilities */}
         <Flex
           justify="space-between"
           height="35px"
           direction="row"
           align="center"
           fontSize="10pt"
-          borderTop="1px solid gray"
+          borderTop="1px solid"
+          borderColor="gray.200"
         >
-          <Text ml="10px">
-            Posted {moment(new Date(post.createdAt.seconds * 1000)).fromNow()}
-          </Text>
           <Flex
             height="100%"
-            padding="10px"
             direction="row"
             align="center"
             justify="flex-start"
-            _hover={{
-              bg: "gray.200",
-            }}
             fontSize="12pt"
-            borderTopLeftRadius="10px"
           >
-            <Icon as={HiSpeakerphone} mr="5px" />
-            <Text>{post.commentCount}</Text>
+            {/* comment button */}
+            <Flex
+              height="100%"
+              _hover={{
+                bg: "gray.200",
+              }}
+              justify="center"
+              align="center"
+              padding="10px"
+              borderTopRightRadius="10px"
+              borderBottomLeftRadius="10px"
+            >
+              <Icon as={HiSpeakerphone} mr="5px" />
+              <Text fontSize="10pt">{post.commentCount}</Text>
+            </Flex>
+
+            {/* delete button */}
+            {madeByUser && (
+              <Flex
+                height="100%"
+                _hover={{
+                  bg: "gray.200",
+                }}
+                justify="center"
+                align="center"
+                padding="10px"
+                borderTopRightRadius="10px"
+                borderBottomLeftRadius="10px"
+                onClick={handleDelete}
+              >
+                <Icon as={AiFillDelete} fontSize="13pt" mr="5px" mb={0.5} />
+                <Text fontSize="10pt">Delete</Text>
+              </Flex>
+            )}
           </Flex>
+
+          {/* display time */}
+          <Text mr="10px">
+            Posted {moment(new Date(post.createdAt.seconds * 1000)).fromNow()}
+          </Text>
         </Flex>
       </Flex>
 
       {/* like/dislike bar */}
       <Flex width="20px" height="100%" direction="column">
-        {/* {touchedByUser >= 0 && (
-          <Flex
-            height="42.5px"
-            borderRightRadius="10px"
-            bg={touchedByUser === 1 ? "brand.100" : "brand.50"}
-            _hover={{ bg: "brand.100" }}
-            justify="center"
-            align="flex-start"
-            padding="5px"
-            onClick={onVote}
-          >
-            <Icon color="white" fontSize="10pt" as={GiHeartPlus} />
-          </Flex>
-        )} */}
-        {/* {touchedByUser <= 0 && (
-          <Flex
-            height="42.5px"
-            borderRightRadius="10px"
-            bg={touchedByUser === -1 ? "blue.400" : "blue.300"}
-            _hover={{ bg: "blue.400" }}
-            justify="center"
-            align="flex-end"
-            padding="5px"
-            onClick={onVote}
-          >
-            <Icon color="white" fontSize="10pt" as={GiHeartMinus} />
-          </Flex>
-        )} */}
+        <Flex
+          height={
+            touchedByUser == 1 ? "60px" : touchedByUser == 0 ? "42.5px" : "25px"
+          }
+          borderRightRadius="10px"
+          bg={touchedByUser === 1 ? "#B25068" : "#d98fa1"}
+          _hover={{ bg: "#B25068" }}
+          justify="center"
+          align="flex-start"
+          padding="5px"
+          onClick={() => onVote(post, 1)}
+        >
+          <Icon as={FaHeart} color="white" fontSize="10pt" />
+        </Flex>
+        <Flex
+          height={
+            touchedByUser == -1
+              ? "60px"
+              : touchedByUser == 0
+              ? "42.5px"
+              : "25px"
+          }
+          borderRightRadius="10px"
+          bg={touchedByUser == -1 ? "blue.400" : "blue.300"}
+          _hover={{ bg: "blue.400" }}
+          justify="center"
+          align="flex-end"
+          padding="5px"
+          onClick={() => onVote(post, -1)}
+        >
+          <Icon as={FaHeartBroken} color="white" fontSize="10pt" />
+        </Flex>
       </Flex>
     </Flex>
   );

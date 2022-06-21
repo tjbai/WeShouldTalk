@@ -5,8 +5,8 @@ import About from "../../components/Discuss/About";
 import CreatePost from "../../components/Discuss/CreatePost";
 import DiscussHeader from "../../components/Discuss/DiscussHeader";
 import PageContent from "../../components/Layout/PageContent";
-import { firestore } from "../../firebase/clientApp";
 import AllPosts from "../../components/Discuss/AllPosts";
+import { BsPeopleFill } from "react-icons/bs";
 
 type DiscussPageProps = {
   communityData: Community;
@@ -17,7 +17,11 @@ const index: React.FC = ({}) => {
 
   return (
     <>
-      <DiscussHeader />
+      <DiscussHeader
+        icon={BsPeopleFill}
+        title="DISCUSS"
+        caption="A place for insightful comments and healthy discourse"
+      />
       <PageContent>
         <></>
         <>

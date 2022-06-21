@@ -1,13 +1,14 @@
 import { Box, Flex, Text } from "@chakra-ui/react";
 import { useMediaQuery } from "@chakra-ui/react";
 import React from "react";
+import HostButton from "./HostButton";
 
 type AboutProps = {};
 
 const About: React.FC<AboutProps> = () => {
   return (
     <Flex
-      width="250px"
+      width="260px"
       height="400px"
       position="absolute"
       bgColor="gray.100"
@@ -42,10 +43,38 @@ const About: React.FC<AboutProps> = () => {
           bg="white"
           borderRadius="10px"
           padding="10px 16px"
+          direction="column"
         >
           <Text color="brand.200" fontSize="11pt">
-            A podcast about ...
+            A podcast about college life and mental health, born out of{" "}
+            <a href="https://www.jhu.edu">
+              <Text as="b">Johns Hopkins University.</Text>
+            </a>{" "}
+            Made by students, meant for students.
           </Text>
+          <Text
+            borderBottom="2px solid"
+            borderColor="brand.200"
+            color="brand.200"
+            mt={2}
+            pb={1}
+            fontWeight="bold"
+            fontSize="12pt"
+            align="center"
+            width="80%"
+            alignSelf="center"
+          >
+            Hosts
+          </Text>
+          <Flex
+            flex={1}
+            direction="column"
+            align="center"
+            justify="space-evenly"
+          >
+            <HostButton name="Jeniffer Min" instagramHandle="jjeniffermin" />
+            <HostButton name="Isabella Evansen" instagramHandle="izzyyy__eee" />
+          </Flex>
         </Flex>
       </Flex>
     </Flex>

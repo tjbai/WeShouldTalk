@@ -6,11 +6,13 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "../../firebase/clientApp";
 import Directory from "./Directory";
 import { HiSpeakerphone } from "react-icons/hi";
+import { useRouter } from "next/router";
 
 type NavbarProps = {};
 
 const Navbar: React.FC = () => {
   const [user, loading, error] = useAuthState(auth);
+  const router = useRouter();
 
   return (
     <Flex
@@ -26,11 +28,14 @@ const Navbar: React.FC = () => {
     >
       <Flex
         align="center"
-        // bg="brand.200"
         height="35px"
         borderRadius="10px"
         padding="8px 10px"
         m="0px 5px"
+        onClick={() => router.push("/discuss")}
+        _hover={{
+          cursor: "pointer",
+        }}
       >
         <Icon as={HiSpeakerphone} mr="5px" fontSize="18pt" />
         <Text display={{ base: "none", md: "unset" }}>

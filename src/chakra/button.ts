@@ -26,7 +26,7 @@ export const Button: ComponentStyleConfig = {
     },
     disabled: {
       color: "white",
-      backgroundColor: "#E0B9C3",
+      backgroundColor: "brand.10",
       _hover: {
         cursor: "not-allowed",
       },

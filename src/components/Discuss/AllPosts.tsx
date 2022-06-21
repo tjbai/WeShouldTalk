@@ -14,6 +14,7 @@ import { Post } from "../../atoms/postAtom";
 import SinglePost from "./SinglePost";
 import { useAuthState } from "react-firebase-hooks/auth";
 import LoadingPost from "./LoadingPost";
+import { IoConstructOutline } from "react-icons/io5";
 
 type PostProps = {};
 
@@ -46,14 +47,22 @@ const AllPosts: React.FC<PostProps> = () => {
     }
   };
 
+  const touchValue = (post: Post) => {
+    let voteValue = 0;
+    let val = postStateVal.touchedPosts.find(
+      (item) => item.postId === post.id
+    )?.voteValue;
+
+    if (typeof val === "undefined") {
+      return 0;
+    } else {
+      return val;
+    }
+  };
+
   useEffect(() => {
     getPosts();
   }, []);
-
-  // if (typeof window === "undefined") {
-  //   console.log("UNDEFINED");
-  //   return <></>;
-  // }
 
   return (
     <>
@@ -71,12 +80,11 @@ const AllPosts: React.FC<PostProps> = () => {
               key={p.title}
               post={p}
               madeByUser={user?.uid === p.creatorId}
-              touchedByUser={0}
+              touchedByUser={touchValue(p)}
               onVote={onVote}
               onSelect={onSelect}
               onRemove={onRemove}
             />
-            // <Text key={p.title}>{p.title}</Text>
           ))}
         </Stack>
       )}

@@ -1,10 +1,18 @@
 import { Box, Circle, Flex, Icon, Text, useMediaQuery } from "@chakra-ui/react";
 import React from "react";
-import { BsPeopleFill, BsTranslate } from "react-icons/bs";
+import { BsPeopleFill } from "react-icons/bs";
 
-type DiscussHeaderProps = {};
+type DiscussHeaderProps = {
+  icon: any;
+  title: string;
+  caption: string;
+};
 
-const DiscussHeader: React.FC<DiscussHeaderProps> = () => {
+const DiscussHeader: React.FC<DiscussHeaderProps> = ({
+  icon,
+  title,
+  caption,
+}) => {
   const [minLabelWidth] = useMediaQuery("(min-width: 650px)");
 
   return (
@@ -20,7 +28,7 @@ const DiscussHeader: React.FC<DiscussHeaderProps> = () => {
             size="80px"
             bg="white"
           >
-            <Icon color="brand.100" as={BsPeopleFill} fontSize={50} />
+            <Icon color="brand.100" as={icon} fontSize={50} />
           </Circle>
           <Flex direction="column">
             <Text
@@ -32,20 +40,19 @@ const DiscussHeader: React.FC<DiscussHeaderProps> = () => {
               margin="0px 5px"
               marginTop="5px"
             >
-              DISCUSS
+              {title}
             </Text>
-            <Text
-              fontWeight="bold"
-              color="brand.200"
-              position="relative"
-              top={-5}
-              left={1}
-              // display={{ base: "none", md: "flex" }}
-            >
-              {minLabelWidth
-                ? "A place for insightful comments and healthy discourse."
-                : ""}
-            </Text>
+            {minLabelWidth && (
+              <Text
+                fontWeight="bold"
+                color="brand.200"
+                position="relative"
+                top={-5}
+                left={1}
+              >
+                {caption}
+              </Text>
+            )}
           </Flex>
         </Flex>
       </Flex>

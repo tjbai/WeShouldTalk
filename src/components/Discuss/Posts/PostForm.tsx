@@ -75,6 +75,10 @@ const NewPostForm: React.FC<NewPostFormProps> = ({ user }) => {
     // Store post in firebase firestore "discuss" collection
     try {
       const docRef = await addDoc(collection(firestore, "discuss"), post);
+      await updateDoc(docRef, {
+        id: docRef.id,
+      });
+      // console.log("GETS HERE", docRef.id);
 
       // If there is an image, store the image in firebase storage.
       if (image) {

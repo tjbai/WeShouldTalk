@@ -44,8 +44,7 @@ const TextInputs: React.FC<TextInputsProps> = ({
           width="40%"
           height="45px"
           variant={!text.title ? "disabled" : "log"}
-          // onClick={!text.title ? () => {} : handleSubmit}
-          onClick={handleSubmit}
+          onClick={!text.title ? () => {} : handleSubmit}
           isLoading={loading}
         >
           Post
