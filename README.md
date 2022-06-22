@@ -1,10 +1,10 @@
 # I Think We Should Talk
+Note: This website is still far from done. More of a template/skeleton for future projects or features.
 
 ![mergedImages](./public/images/mergedImages.png)
-
 ### About _I Think We Should Talk_
 
-A podcast hosted by my 2 great friends, Jen and Izzy, coming Fall 2022!
+A podcast hosted by my 2 great friends, Jen and Izzy, coming Fall 2022.
 
 ### Things I learned
 
