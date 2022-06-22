@@ -2,7 +2,10 @@ import {
   Button,
   Flex,
   NumberDecrementStepper,
+  Skeleton,
+  Stack,
   Textarea,
+  Text,
 } from "@chakra-ui/react";
 import {
   collection,
@@ -186,24 +189,46 @@ const Comments: React.FC<CommentsProps> = ({ post }) => {
         </Button>
       </Flex>
 
+      {/* Loading comments skeletons */}
+      {fetchCommentsLoading && (
+        <Stack
+          bg="white"
+          width="100%"
+          mt={4}
+          borderRadius="10px"
+          direction="column"
+          align="flex-start"
+          padding="20px"
+        >
+          <Skeleton width="100%" height="20px" borderRadius="5px" />
+          <Skeleton width="100%" height="20px" borderRadius="5px" />
+          <Skeleton width="100%" height="20px" borderRadius="5px" />
+        </Stack>
+      )}
+
       {/* Actual comment section area */}
-      <Flex
-        bg="white"
-        borderRadius="10px"
-        padding="10px"
-        width="100%"
-        align="center"
-        mt={4}
-        direction="column"
-      >
-        {comments.map((c) =>
-          c.postID === post.id ? (
-            <SingleComment key={c.id} comment={c} onDelete={onDeleteComment} />
-          ) : (
-            <></>
-          )
-        )}
-      </Flex>
+      {!fetchCommentsLoading && (
+        <Flex
+          bg="white"
+          borderRadius="10px"
+          // padding="10px"
+          width="100%"
+          align="center"
+          mt={4}
+          direction="column"
+        >
+          {comments.map(
+            (c) =>
+              c.postID === post.id && (
+                <SingleComment
+                  key={c.id}
+                  comment={c}
+                  onDelete={onDeleteComment}
+                />
+              )
+          )}
+        </Flex>
+      )}
     </Flex>
   );
 };

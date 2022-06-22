@@ -19,7 +19,7 @@ const SignOut: React.FC<SignOutProps> = ({ user }) => {
       <Flex display={{ base: "none", lg: "flex" }}>
         <Text m={2}>Hi, {user.displayName}</Text>
       </Flex>
-      <UserStats user={user} />
+      {/* <UserStats user={user} /> */}
       <Button bg="white" onClick={() => signOut(auth)} height="35px">
         Sign Out
       </Button>

@@ -6,22 +6,22 @@ Bootstrapped with create-next-app. Designed to be performant and extensible.
 
 A podcast about ...
 
-## Things I had a good time learning
+## Things I learned
 
-- Basics of Firebase/NoSQL databases
+- **Basics of Firebase/NoSQL databases**
   - Basic CRUD operations
   - Firebase SDK
-- The beauty of TypeScript
+- **The beauty of TypeScript**
   - Working with types and interfaces. God bless the autocomplete.
-- Custom hooks
-  - Not as scary as I expected. Super useful.
-- Working with NextJS
+- **More advanced ReactJS concepts**
+  - Customs Hooks. Not as scary as I expected. Super useful.
+- **Working with NextJS**
   - Dynamic routes and page routing
   - Server-side rendering
   - Wrapping \_app.tsx in a layout
-- Chakra UI
+- **Chakra UI**
   - Probably the coolest UI library I've ever used (also the only one)
-- State management with Recoil
+- **State management with Recoil**
   - Also insanely useful
 
 ## Relevant features to add closer to production

@@ -9,12 +9,28 @@ import {
   Text,
 } from "@chakra-ui/react";
 import React from "react";
-import { useSetRecoilState } from "recoil";
+import { useRecoilState, useSetRecoilState } from "recoil";
 import { authModalState } from "../../atoms/authModalAtom";
 import { BsPeopleFill, BsPencilFill } from "react-icons/bs";
+import { SiLivejournal } from "react-icons/si";
+import { Page, pageState } from "../../atoms/pageAtom";
+import { useRouter } from "next/router";
 
-const Directory: React.FC = () => {
+type DirectoryProps = {};
+
+const Directory: React.FC<DirectoryProps> = () => {
   const setModalState = useSetRecoilState(authModalState);
+  const [pageStateVal, setPageStateVal] = useRecoilState(pageState);
+  const router = useRouter();
+
+  const handleRoute = (destination: string) => {
+    const newPage: Page = {
+      name: destination,
+    };
+    setPageStateVal({ currentPage: newPage });
+
+    router.push(`/${destination.replace(/\s/g, "").toLowerCase()}`);
+  };
 
   return (
     <Menu>
@@ -28,17 +44,58 @@ const Directory: React.FC = () => {
       >
         <Flex alignItems="center" justify="space-between">
           <Flex alignItems="center">
-            <Icon as={BsPeopleFill} fontSize={20} />
+            {pageStateVal.currentPage.name === "Discuss" && (
+              <Icon as={BsPeopleFill} fontSize={20} />
+            )}
+            {pageStateVal.currentPage.name === "Write a Host" && (
+              <Icon as={SiLivejournal} fontSize={20} />
+            )}
             <Flex display={{ base: "none", lg: "flex" }}>
               <Text margin={2} fontWeight="bold">
-                Discuss
+                {pageStateVal.currentPage.name}
               </Text>
             </Flex>
           </Flex>
           <ChevronDownIcon />
         </Flex>
       </MenuButton>
-      <MenuList padding="0px 0px" bg="brand.200"></MenuList>
+      <MenuList padding="0px">
+        {/* Discuss page => Write a Host menuItem */}
+        {pageStateVal.currentPage.name === "Discuss" && (
+          <MenuItem
+            borderRadius="10px"
+            _focus={{ bg: "brand.100" }}
+            bg="brand.100"
+            padding="0px 10px"
+            onClick={() => handleRoute("Write a Host")}
+          >
+            <Flex direction="row" flex={1} align="center">
+              <Icon fontSize={22} right={2} as={SiLivejournal} />
+              <Text m={2} fontWeight="bold">
+                Write a Host
+              </Text>
+            </Flex>
+          </MenuItem>
+        )}
+
+        {/* Write a Host page => Discuss menuItem */}
+        {pageStateVal.currentPage.name === "Write a Host" && (
+          <MenuItem
+            borderRadius="10px"
+            _focus={{ bg: "brand.100" }}
+            bg="brand.100"
+            padding="0px 10px"
+            onClick={() => handleRoute("Discuss")}
+          >
+            <Flex direction="row" flex={1} align="center">
+              <Icon fontSize={20} right={2} as={BsPeopleFill} />
+              <Text m={2} fontWeight="bold">
+                Discuss
+              </Text>
+            </Flex>
+          </MenuItem>
+        )}
+      </MenuList>
     </Menu>
   );
 };

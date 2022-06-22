@@ -37,7 +37,7 @@ const SingleComment: React.FC<SingleCommentProps> = ({ comment, onDelete }) => {
   };
 
   return (
-    <Flex m={2} width="100%" borderRadius="10px">
+    <Flex padding="10px" width="100%" borderRadius="10px">
       <Flex
         flex={1}
         padding="10px"
