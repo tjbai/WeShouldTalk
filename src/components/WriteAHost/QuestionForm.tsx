@@ -21,7 +21,13 @@ type QuestionFormProps = {};
 
 const QuestionForm: React.FC<QuestionFormProps> = () => {
   return (
-    <Flex bg="gray.100" borderRadius="10px" maxWidth="600px" direction="column">
+    <Flex
+      mt={4}
+      bg="white"
+      borderRadius="10px"
+      maxWidth="600px"
+      direction="column"
+    >
       {/* <Flex borderTopRadius="10px" height="20px" width="100%" bg="brand.100" /> */}
 
       <Stack
@@ -37,7 +43,7 @@ const QuestionForm: React.FC<QuestionFormProps> = () => {
             <Radio
               value="1"
               bgColor="brand.25"
-              borderColor="gray.100"
+              borderWidth="0px"
               colorScheme="red"
               mr={8}
             >
@@ -46,7 +52,7 @@ const QuestionForm: React.FC<QuestionFormProps> = () => {
             <Radio
               value="2"
               bgColor="brand.25"
-              borderColor="gray.100"
+              borderWidth="0px"
               colorScheme="red"
               mr={8}
             >
@@ -55,7 +61,7 @@ const QuestionForm: React.FC<QuestionFormProps> = () => {
             <Radio
               value="3"
               bgColor="brand.25"
-              borderColor="gray.100"
+              borderWidth="0px"
               colorScheme="red"
             >
               Do share
@@ -63,7 +69,7 @@ const QuestionForm: React.FC<QuestionFormProps> = () => {
           </Flex>
         </RadioGroup>
         <Input
-          bg="gray.200"
+          bg="gray.100"
           fontWeight="bold"
           placeholder="Title"
           _focus={{
@@ -72,7 +78,7 @@ const QuestionForm: React.FC<QuestionFormProps> = () => {
         />
 
         <Textarea
-          bg="gray.200"
+          bg="gray.100"
           height="500px"
           placeholder="Speak your mind!"
           _focus={{

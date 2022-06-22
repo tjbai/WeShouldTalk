@@ -6,7 +6,6 @@ import { RecoilRoot } from "recoil";
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
-    // Recoil to manage state and Chakra for UI
     <RecoilRoot>
       <ChakraProvider theme={theme}>
         <Layout>

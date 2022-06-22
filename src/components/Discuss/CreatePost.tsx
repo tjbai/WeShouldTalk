@@ -35,6 +35,7 @@ const CreatePost: React.FC<CreatePostProps> = (query) => {
       borderColor="gray.300"
       p={2}
       mb={4}
+      mt="20px"
       grow={1}
       maxWidth={{ createPostOverlaps: "540px", base: "none" }}
     >

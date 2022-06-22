@@ -6,6 +6,7 @@ import {
   writeBatch,
 } from "firebase/firestore";
 import { deleteObject, ref } from "firebase/storage";
+import { useRouter } from "next/router";
 import React, { useEffect } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useRecoilState, useSetRecoilState } from "recoil";
@@ -18,6 +19,7 @@ type usePostsProps = {};
 const usePosts = () => {
   const [postStateVal, setPostStateVal] = useRecoilState(postState);
   const [user] = useAuthState(auth);
+  const router = useRouter();
   const SetAuthModalState = useSetRecoilState(authModalState);
 
   const onVote = async (post: Post, vote: number) => {
@@ -119,7 +121,13 @@ const usePosts = () => {
     }
   };
 
-  const onSelect = () => {};
+  const onSelect = (post: Post) => {
+    setPostStateVal((prev) => ({
+      ...prev,
+      selectedPost: post,
+    }));
+    router.push(`/discuss/${post.id}`);
+  };
 
   const onRemove = async (post: Post): Promise<boolean> => {
     try {
