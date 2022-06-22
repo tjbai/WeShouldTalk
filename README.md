@@ -1,6 +1,6 @@
 # I Think We Should Talk
 
-Bootstrapped with create-next-app. Designed to be performant and extensible.
+![mergedImages](./public/images/mergedImages.png)
 
 ### About _I Think We Should Talk_
 
@@ -23,8 +23,6 @@ A podcast hosted by my 2 great friends, Jen and Izzy, coming Fall 2022!
   - Probably the coolest UI library I've ever used (also the only one)
 - **State management with Recoil**
   - Also insanely useful
-
-![mergedImages](./public/images/mergedImages.png)
 
 ### Relevant features to add closer to production
 
