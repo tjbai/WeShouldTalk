@@ -2,11 +2,11 @@
 
 Bootstrapped with create-next-app. Designed to be performant and extensible.
 
-## About _I Think We Should Talk_
+### About _I Think We Should Talk_
 
-A podcast about ...
+A podcast hosted by my 2 great friends, Jen and Izzy, coming Fall 2022!
 
-## Things I learned
+### Things I learned
 
 - **Basics of Firebase/NoSQL databases**
   - Basic CRUD operations
@@ -24,7 +24,9 @@ A podcast about ...
 - **State management with Recoil**
   - Also insanely useful
 
-## Relevant features to add closer to production
+![mergedImages](./public/images/mergedImages.png)
+
+### Relevant features to add closer to production
 
 - Edit posts and comments
 - Add more filtering options
