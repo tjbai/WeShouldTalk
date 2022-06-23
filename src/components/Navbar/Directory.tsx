@@ -8,7 +8,7 @@ import {
   MenuList,
   Text,
 } from "@chakra-ui/react";
-import React from "react";
+import React, { useEffect } from "react";
 import { useRecoilState, useSetRecoilState } from "recoil";
 import { authModalState } from "../../atoms/authModalAtom";
 import { BsPeopleFill, BsPencilFill } from "react-icons/bs";
@@ -22,6 +22,7 @@ const Directory: React.FC<DirectoryProps> = () => {
   const setModalState = useSetRecoilState(authModalState);
   const [pageStateVal, setPageStateVal] = useRecoilState(pageState);
   const router = useRouter();
+  const { asPath } = useRouter();
 
   const handleRoute = (destination: string) => {
     const newPage: Page = {
@@ -31,6 +32,14 @@ const Directory: React.FC<DirectoryProps> = () => {
 
     router.push(`/${destination.replace(/\s/g, "").toLowerCase()}`);
   };
+
+  useEffect(() => {
+    const newPage: Page = {
+      name: asPath === "/discuss" ? "Discuss" : "Write a Host",
+    };
+
+    setPageStateVal({ currentPage: newPage });
+  }, [asPath]);
 
   return (
     <Menu>
@@ -44,10 +53,8 @@ const Directory: React.FC<DirectoryProps> = () => {
       >
         <Flex alignItems="center" justify="space-between">
           <Flex alignItems="center">
-            {pageStateVal.currentPage.name === "Discuss" && (
-              <Icon as={BsPeopleFill} fontSize={20} />
-            )}
-            {pageStateVal.currentPage.name === "Write a Host" && (
+            {asPath === "/discuss" && <Icon as={BsPeopleFill} fontSize={20} />}
+            {asPath === "/writeahost" && (
               <Icon as={SiLivejournal} fontSize={20} />
             )}
             <Flex display={{ base: "none", lg: "flex" }}>
@@ -61,7 +68,7 @@ const Directory: React.FC<DirectoryProps> = () => {
       </MenuButton>
       <MenuList padding="0px">
         {/* Discuss page => Write a Host menuItem */}
-        {pageStateVal.currentPage.name === "Discuss" && (
+        {asPath === "/discuss" && (
           <MenuItem
             borderRadius="10px"
             _focus={{ bg: "brand.100" }}
